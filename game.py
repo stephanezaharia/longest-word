@@ -3,6 +3,7 @@
 
 import random
 import string
+import requests
 
 class Game:
     """ This is the longest word implementation class
@@ -29,6 +30,13 @@ class Game:
         """  This is the longest word check function
         """
         if not word or len(word) > len(self.grid):
+            return False
+
+        try:
+            r = requests.get('https://wagon-dictionary.herokuapp.com/'+word)
+            if not r.json()["found"]:
+                return False
+        except:
             return False
 
         for letter in word:
