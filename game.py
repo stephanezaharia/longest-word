@@ -1,6 +1,5 @@
-"""
-This is the longest word implementation class
-"""
+# pylint: disable=missing-docstring
+# pylint: disable=too-few-public-methods
 
 import random
 import string
