@@ -11,6 +11,8 @@ astroid = "*"
 [packages]
 requests = "*"
 gunicorn = "*"
+flask = "*"
+
 
 [requires]
 python_version = "3.7"
