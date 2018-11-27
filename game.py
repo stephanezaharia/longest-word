@@ -3,6 +3,7 @@
 
 import random
 import string
+import requests
 
 class Game:
     """ This is the longest word implementation class
@@ -12,7 +13,6 @@ class Game:
         """ This is the longest word implementation class
         """
         self.random_grid()
-        print(self.grid)
 
     def random_grid(self):
         """ add a random grid in object. Make sure every letter appears once
@@ -31,12 +31,19 @@ class Game:
         """
         if not word or len(word) > len(self.grid):
             return False
-        for letter in self.grid:
-            cnt = word.count(letter)
-            #print(letter,cnt)
-            if cnt > 1:
+
+        try:
+            r = requests.get('https://wagon-dictionary.herokuapp.com/'+word)
+            if not r.json()["found"]:
                 return False
+        except:
+            return False
+
         for letter in word:
-            if letter not in self.grid:
+            cnt = word.count(letter)
+            cntmax = self.grid.count(letter)
+            if letter not in self.grid or cnt>cntmax:
+                print ("wrong",letter)
                 return False
+
         return True
